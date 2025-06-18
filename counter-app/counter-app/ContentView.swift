@@ -22,7 +22,9 @@ struct ContentView: View {
                 HStack {
                     Button(
                         action: {
-                            count -= 1
+                            if count > maxCount {
+                                count -= 1
+                            }
                         },label: {
                             Image(systemName: "minus")
                                 .frame(width: 150, height: 50)
