@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
 
-            VStack {
+        VStack(spacing: 20) {
                 Text("\(count)")
                     .font(.largeTitle)
                     .padding()
@@ -41,6 +41,18 @@ struct ContentView: View {
                         }
                     )
                 }
+                
+                Button(
+                    action: {
+                        count = 0
+                    },label: {
+                        Text("リセット")
+                            .foregroundStyle(Color.white)
+                            .frame(width: 300, height: 50)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    }
+                )
             }
         }
     }
