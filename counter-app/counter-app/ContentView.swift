@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var count: Int = 0
+    @State private var maxCount: Int = 0
     
     var body: some View {
         NavigationStack {
@@ -32,7 +33,9 @@ struct ContentView: View {
                     
                     Button(
                         action: {
-                            count += 1
+                            if count < maxCount {
+                                        count += 1
+                                    }
                         },label: {
                             Image(systemName: "plus")
                                 .frame(width: 150, height: 50)
@@ -55,7 +58,7 @@ struct ContentView: View {
                 )
                 
                 NavigationLink {
-                    SettingView()
+                    SettingView(maxCount: $maxCount)
                 } label: {
                     Text("設定")
                         .foregroundStyle(Color.white)
