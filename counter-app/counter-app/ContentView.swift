@@ -12,8 +12,8 @@ struct ContentView: View {
     @State var count: Int = 0
     
     var body: some View {
-
-        VStack(spacing: 20) {
+        NavigationStack {
+            VStack(spacing: 20) {
                 Text("\(count)")
                     .font(.largeTitle)
                     .padding()
@@ -53,9 +53,20 @@ struct ContentView: View {
                             .cornerRadius(10)
                     }
                 )
+                
+                NavigationLink {
+                    SettingView()
+                } label: {
+                    Text("設定")
+                        .foregroundStyle(Color.white)
+                        .frame(width: 300, height: 50)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
             }
         }
     }
+}
 
 #Preview {
     ContentView()
