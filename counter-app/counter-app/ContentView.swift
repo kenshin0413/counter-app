@@ -24,6 +24,8 @@ struct ContentView: View {
                         action: {
                             if count > maxCount {
                                 count -= 1
+                            } else {
+                                print("下限値を下回りました!")
                             }
                         },label: {
                             Image(systemName: "minus")
@@ -37,7 +39,9 @@ struct ContentView: View {
                         action: {
                             if count < maxCount {
                                         count += 1
-                                    }
+                            } else {
+                                print("上限値を上回りました!")
+                            }
                         },label: {
                             Image(systemName: "plus")
                                 .frame(width: 150, height: 50)
