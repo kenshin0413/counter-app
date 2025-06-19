@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     @State var count: Int = 0
-    
+    @State var isShowingModal = false
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -22,46 +21,47 @@ struct ContentView: View {
                     Button(
                         action: {
                             count -= 1
-                        },label: {
+                        }, label: {
                             Image(systemName: "minus")
                                 .frame(width: 150, height: 50)
                                 .background(Color(.systemGray4))
                                 .cornerRadius(10)
-                        }
-                    )
+                        })
                     
                     Button(
                         action: {
                             count += 1
-                        },label: {
+                        }, label: {
                             Image(systemName: "plus")
                                 .frame(width: 150, height: 50)
                                 .background(Color(.systemGray4))
                                 .cornerRadius(10)
-                        }
-                    )
+                        })
                 }
                 
                 Button(
                     action: {
                         count = 0
-                    },label: {
+                    }, label: {
                         Text("リセット")
                             .foregroundStyle(Color.white)
                             .frame(width: 300, height: 50)
                             .background(Color.blue)
                             .cornerRadius(10)
-                    }
-                )
+                    })
                 
-                NavigationLink {
+                Button(
+                    action: {
+                        isShowingModal = true
+                    }, label: {
+                        Text("設定")
+                            .foregroundStyle(Color.white)
+                            .frame(width: 300, height: 50)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    })
+                .sheet(isPresented: $isShowingModal) {
                     SettingView()
-                } label: {
-                    Text("設定")
-                        .foregroundStyle(Color.white)
-                        .frame(width: 300, height: 50)
-                        .background(Color.blue)
-                        .cornerRadius(10)
                 }
             }
         }
