@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
+    @Binding var minCount: Int
     @Binding var maxCount: Int
     @Environment(\.dismiss) private var dismiss
     var body: some View {
@@ -15,6 +16,13 @@ struct SettingView: View {
             HStack {
                 Text("カウンターの上限値:")
                 TextField("上限値を入力してください", value: $maxCount, format: .number)
+                    .keyboardType(.numberPad)
+                    .frame(width: 180)
+            }
+            
+            HStack {
+                Text("カウンターの下限値:")
+                TextField("下限値を入力してください", value: $minCount, format: .number)
                     .keyboardType(.numberPad)
                     .frame(width: 180)
             }
@@ -31,5 +39,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView(maxCount: .constant(1))
+    SettingView(minCount: .constant(1), maxCount: .constant(1))
 }

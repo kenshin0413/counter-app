@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var count: Int = 0
+    @State var minCount: Int = 0
     @State var maxCount: Int = 0
     @State var isShowingModal = false
     var body: some View {
@@ -19,7 +20,11 @@ struct ContentView: View {
             
             HStack {
                 Button(action: {
-                    count -= 1
+                    if count > minCount {
+                        count -= 1
+                    } else {
+                        print("下限値を下回りました!")
+                    }
                 }, label: {
                     Image(systemName: "minus")
                         .frame(width: 150, height: 50)
@@ -30,6 +35,8 @@ struct ContentView: View {
                 Button(action: {
                     if count < maxCount {
                         count += 1
+                    } else {
+                        print("上限値を上回りました!")
                     }
                 }, label: {
                     Image(systemName: "plus")
@@ -58,9 +65,10 @@ struct ContentView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             })
+            
         }
         .sheet(isPresented: $isShowingModal) {
-            SettingView(maxCount: $maxCount)
+            SettingView(minCount: $minCount, maxCount: $maxCount)
         }
     }
 }
