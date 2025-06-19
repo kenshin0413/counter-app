@@ -10,8 +10,9 @@ import SwiftUI
 struct ContentView: View {
     
     @State var count: Int = 0
-    @State private var maxCount: Int = 0
-    @State private var isShowingModal = false
+    @State var minCount: Int = 0
+    @State var maxCount: Int = 0
+    @State var isShowingModal = false
     
     var body: some View {
         NavigationStack {
@@ -23,7 +24,7 @@ struct ContentView: View {
                 HStack {
                     Button(
                         action: {
-                            if count > maxCount {
+                            if count > minCount {
                                 count -= 1
                             } else {
                                 print("下限値を下回りました!")
@@ -52,17 +53,15 @@ struct ContentView: View {
                     )
                 }
                 
-                Button(
-                    action: {
-                        count = 0
-                    }, label: {
-                        Text("リセット")
-                            .foregroundStyle(Color.white)
-                            .frame(width: 300, height: 50)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                    }
-                )
+                Button(action: {
+                    count = 0
+                }, label: {
+                    Text("リセット")
+                        .foregroundStyle(Color.white)
+                        .frame(width: 300, height: 50)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                })
                 
                 Button(action: {
                     isShowingModal = true
@@ -74,7 +73,7 @@ struct ContentView: View {
                         .cornerRadius(10)
                 })
                 .sheet(isPresented: $isShowingModal) {
-                    SettingView(maxCount: $maxCount)
+                    SettingView(minCount: $minCount, maxCount: $maxCount)
                 }
             }
         }
