@@ -8,24 +8,19 @@
 import SwiftUI
 
 struct SettingView: View {
-    
-    @State var number = ""
     @Binding var maxCount: Int
     @Environment(\.dismiss) private var dismiss
-
     var body: some View {
         VStack(spacing: 20) {
             HStack {
                 Text("カウンターの上限値:")
-                TextField("上限値を入力してください", text: $number)
+                TextField("上限値を入力してください", value: $maxCount, format: .number)
                     .keyboardType(.numberPad)
                     .frame(width: 180)
             }
-            Button("保存") {
-                if let value = Int(number) {
-                    maxCount = value
-                    dismiss()
-                }
+            
+            Button("閉じる") {
+                dismiss()
             }
             .frame(width: 100, height: 30)
             .background(Color.blue)
