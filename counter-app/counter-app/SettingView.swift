@@ -11,7 +11,6 @@ struct SettingView: View {
     @Binding var minCount: Int
     @Binding var maxCount: Int
     @Environment(\.dismiss) private var dismiss
-    
     var body: some View {
         VStack(spacing: 20) {
             HStack {
@@ -20,12 +19,14 @@ struct SettingView: View {
                     .keyboardType(.numberPad)
                     .frame(width: 180)
             }
+            
             HStack {
                 Text("カウンターの下限値:")
                 TextField("下限値を入力してください", value: $minCount, format: .number)
                     .keyboardType(.numberPad)
                     .frame(width: 180)
             }
+            
             Button("閉じる") {
                 dismiss()
             }
