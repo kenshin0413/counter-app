@@ -15,16 +15,18 @@ struct SettingView: View {
         VStack(spacing: 20) {
             HStack {
                 Text("カウンターの上限値:")
-                TextField("上限値を入力してください", value: $maxCount, format: .number)
-                    .keyboardType(.numberPad)
-                    .frame(width: 180)
+                Stepper(value: $maxCount, step: 1) {
+                    Text("\(maxCount)")
+                }
+                .frame(width: 200)
             }
             
             HStack {
                 Text("カウンターの下限値:")
-                TextField("下限値を入力してください", value: $minCount, format: .number)
-                    .keyboardType(.numberPad)
-                    .frame(width: 180)
+                Stepper(value: $minCount, step: 1) {
+                    Text("\(minCount)")
+                }
+                .frame(width: 200)
             }
             
             Button("閉じる") {
@@ -39,5 +41,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView(minCount: .constant(1), maxCount: .constant(1))
+    SettingView(minCount: .constant(0), maxCount: .constant(0))
 }
