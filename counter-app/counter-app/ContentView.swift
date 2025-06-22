@@ -12,6 +12,8 @@ struct ContentView: View {
     @State var minCount: Int = 0
     @State var maxCount: Int = 0
     @State var isShowingModal = false
+    @State var showAlert = false
+    @State var alertMessage = ""
     var body: some View {
         VStack(spacing: 20) {
             Text("\(count)")
@@ -23,7 +25,8 @@ struct ContentView: View {
                     if count > minCount {
                         count -= 1
                     } else {
-                        print("下限値を下回りました!")
+                        alertMessage = "下限に達しています"
+                        showAlert = true
                     }
                 }, label: {
                     Image(systemName: "minus")
@@ -36,7 +39,8 @@ struct ContentView: View {
                     if count < maxCount {
                         count += 1
                     } else {
-                        print("上限値を上回りました!")
+                        alertMessage = "上限に達しています"
+                        showAlert = true
                     }
                 }, label: {
                     Image(systemName: "plus")
@@ -65,10 +69,15 @@ struct ContentView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             })
-            
         }
         .sheet(isPresented: $isShowingModal) {
             SettingView(minCount: $minCount, maxCount: $maxCount)
+        }
+        
+        .alert("", isPresented: $showAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(alertMessage)
         }
     }
 }
