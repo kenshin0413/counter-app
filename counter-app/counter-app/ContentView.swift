@@ -16,10 +16,17 @@ struct ContentView: View {
     @State var alertMessage = ""
     var body: some View {
         VStack(spacing: 20) {
-            Text("\(count)")
-                .font(.largeTitle)
-                .padding()
-            
+            if count > 0 {
+                Text("\(count)")
+                    .foregroundStyle(Color.green)
+            } else if count < 0 {
+                Text("\(count)")
+                    .foregroundStyle(Color.red)
+            } else if count == 0 {
+                Text("\(count)")
+                    .foregroundStyle(Color.primary)
+            }
+
             HStack {
                 Button(action: {
                     if count > minCount {
